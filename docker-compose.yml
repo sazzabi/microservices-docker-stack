@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    build: .docker/web
+    build: docker/web
     image: sazzabi/web
     container_name: web
     ports:
