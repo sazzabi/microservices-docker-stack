@@ -1,11 +1,26 @@
-version: '2'
+version: '3'
+
 services:
   web:
     build: docker/web
     image: sazzabi/web
     container_name: web
+    env_file:
+      - .env
+    volumes:
+      - .:${PROJECT_DIR}
+    working_dir: ${PROJECT_DIR}
     ports:
       - 8000:80
-    volumes:
-      - .:/home/wwwroot
+    depends_on:
+      - php
 
+  php:
+    build: docker/php
+    image: sazzabi/php
+    container_name: php
+    env_file:
+      - .env
+    volumes:
+      - .:${PROJECT_DIR}
+    working_dir: ${PROJECT_DIR}
