@@ -11,7 +11,7 @@ services:
       - .:${PROJECT_DIR}
     working_dir: ${PROJECT_DIR}
     ports:
-      - 8000:80
+      - 8080:80
     depends_on:
       - php
 
@@ -24,3 +24,25 @@ services:
     volumes:
       - .:${PROJECT_DIR}
     working_dir: ${PROJECT_DIR}
+
+  haproxy:
+    build: docker/haproxy
+    image: sazzabi/haproxy
+    container_name: haproxy
+    env_file:
+      - .env
+    links:
+      - varnish
+    ports:
+      - 80:80
+
+  varnish:
+    build: docker/varnish
+    image: sazzabi/varnish
+    container_name: varnish
+    env_file:
+      - .env
+    links:
+      - web
+    ports:
+      - 8000:8000
