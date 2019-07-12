@@ -9,6 +9,10 @@ RUN apt-get update \
 
 RUN docker-php-ext-install pdo pdo_mysql zip
 
+RUN pecl install -o -f redis bcmath mbstring
+RUN docker-php-ext-install bcmath mbstring
+RUN docker-php-ext-enable redis bcmath mbstring
+
 COPY php.ini /usr/local/etc/php/php.ini
 COPY php-fpm-pool.conf 	/usr/local/etc/php/pool.d/www.conf
 
