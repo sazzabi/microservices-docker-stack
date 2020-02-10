@@ -1,34 +1,47 @@
 version: '3'
 
 services:
-  web:
-    build: docker/web
-    image: sazzabi/web
-    container_name: web
-    env_file:
-      - .env
-    volumes:
-      - .:${PROJECT_DIR}
-    working_dir: ${PROJECT_DIR}
-    ports:
-      - 8000:80
-    depends_on:
-      - php
+  #  web:
+  #    build: docker/web
+  #    image: sazzabi/web
+  #    container_name: web
+  #    env_file:
+  #      - .env
+  #    volumes:
+  #      - .:${PROJECT_DIR}
+  #    working_dir: ${PROJECT_DIR}
+  #    ports:
+  #      - 8000:80
+  #    depends_on:
+  #      - php
+  #
+  #  php:
+  #    build: docker/php
+  #    image: sazzabi/php
+  #    container_name: php
+  #    env_file:
+  #      - .env
+  #    volumes:
+  #      - .:${PROJECT_DIR}
+  #    working_dir: ${PROJECT_DIR}
 
-  php:
-    build: docker/php
+  microservice-php:
+    build:
+      context: docker/microservice/php
+      dockerfile: Dockerfile-72
     image: sazzabi/php
     container_name: php
     env_file:
       - .env
     volumes:
       - .:${PROJECT_DIR}
+      - .:/usr/local/etc/php/php.ini:ro
     working_dir: ${PROJECT_DIR}
 
-    angular:
-      build: docker/angular
-        image: sazzabi/angular
-        container_name: angular
-        volumes:
-          - .:${PROJECT_DIR}
-        working_dir: ${PROJECT_DIR}
+#  angular:
+#    build: docker/angular
+#      image: sazzabi/angular
+#      container_name: angular
+#      volumes:
+#        - .:${PROJECT_DIR}
+#      working_dir: ${PROJECT_DIR}
