@@ -24,3 +24,11 @@ services:
     volumes:
       - .:${PROJECT_DIR}
     working_dir: ${PROJECT_DIR}
+
+    angular:
+      build: docker/angular
+        image: sazzabi/angular
+        container_name: angular
+        volumes:
+          - .:${PROJECT_DIR}
+        working_dir: ${PROJECT_DIR}
